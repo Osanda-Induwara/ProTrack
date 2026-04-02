@@ -1,0 +1,118 @@
+/**
+ * =====================================================
+ * Comments Section Styles
+ * =====================================================
+ */
+
+.comment-section {
+  border-left: 1px solid #eee;
+  padding-left: 20px;
+}
+
+.comment-section h3 {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.add-comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-comment-form textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.add-comment-form textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.add-comment-form button {
+  align-self: flex-end;
+  padding: 8px 16px;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-comment-form button:hover {
+  background-color: #5568d3;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.comment {
+  background: #f9f9f9;
+  padding: 12px;
+  border-radius: 4px;
+  border-left: 3px solid #667eea;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comment-header strong {
+  color: #333;
+  font-size: 14px;
+}
+
+.comment-date {
+  color: #999;
+  font-size: 12px;
+}
+
+.comment-text {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.btn-delete-small {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 8px;
+  transition: color 0.2s ease;
+}
+
+.btn-delete-small:hover {
+  color: #ff5252;
+  text-decoration: underline;
+}
+
+.no-comments {
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin: 20px 0;
+}

@@ -1,0 +1,26 @@
+/**
+ * Main App Stylesheet
+ */
+
+@import './styles/Auth.css';
+@import './styles/Board.css';
+@import './styles/Kanban.css';
+@import './styles/TaskModal.css';
+@import './styles/Comments.css';
+
+/* Additional spacing and responsive tweaks */
+@media (max-width: 1024px) {
+  .kanban-board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .kanban-board {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-body {
+    grid-template-columns: 1fr !important;
+  }
+}
