@@ -1,30 +1,12 @@
-/**
- * =====================================================
- * User Model (MongoDB Schema)
- * =====================================================
- * 
- * WHY: Defines the structure of user documents in MongoDB.
- * Mongoose schemas enforce data validation and type checking.
- * 
- * FEATURES:
- * - Stores user credentials (securely hashed passwords)
- * - Tracks created boards
- * - Timestamps for audit trails
- */
+  // Defines the structure of user documents in MongoDB.
+ 
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-/**
- * userSchema: Defines the structure of a User document
- * 
- * FIELDS:
- * - email: Unique identifier for login
- * - password: Hashed using bcrypt for security
- * - name: User's display name
- * - boards: Array of Board IDs that user owns or is part of
- * - createdAt: Automatically set to current date
- */
+
+  // userSchema: Defines the structure of a User document
+
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -63,18 +45,9 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-/**
- * PRE-SAVE HOOK: Hash password before saving to database
- * 
- * WHY NEEDED:
- * - Never store plain-text passwords in database
- * - bcrypt hashing is one-way (cannot be reversed)
- * - If only() checks if password field is modified
- * 
- * SECURITY CONSIDERATION:
- * - Salt rounds = 10 (higher = more secure but slower)
- * - This is called EVERY time user data is saved
- */
+
+  // PRE-SAVE HOOK: Hash password before saving to database
+
 userSchema.pre('save', async function(next) {
   // Only hash password if it's new or has been modified
   if (!this.isModified('password')) {
@@ -93,14 +66,9 @@ userSchema.pre('save', async function(next) {
   }
 });
 
-/**
- * INSTANCE METHOD: Compare passwords during login
- * 
- * WHY SEPARATED:
- * - User provides plain-text password during login
- * - We need to compare it with hashed password in database
- * - Can't reverse the hash, so we hash the input and compare
- */
+
+//  INSTANCE METHOD: Compare passwords during login
+
 userSchema.methods.matchPassword = async function(incomingPassword) {
   return await bcrypt.compare(incomingPassword, this.password);
 };
