@@ -257,7 +257,7 @@ const getTasksByBoard = async (boardId) => {
  * @returns {Promise} { success, task }
  */
 const getTaskDetail = async (taskId) => {
-  const response = await api.get(`/tasks/${taskId}`);
+  const response = await api.get(`/${taskId}`);
   return response.data;
 };
 
@@ -270,7 +270,7 @@ const getTaskDetail = async (taskId) => {
  * @returns {Promise} { success, task }
  */
 const updateTask = async (taskId, updates) => {
-  const response = await api.put(`/tasks/${taskId}`, updates);
+  const response = await api.put(`/${taskId}`, updates);
   return response.data;
 };
 
@@ -281,7 +281,7 @@ const updateTask = async (taskId, updates) => {
  * @returns {Promise} { success, message }
  */
 const deleteTask = async (taskId) => {
-  const response = await api.delete(`/tasks/${taskId}`);
+  const response = await api.delete(`/${taskId}`);
   return response.data;
 };
 

@@ -103,7 +103,22 @@ const TaskModal = ({ task, board, onClose, onUpdate, onDelete }) => {
       }
 
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to save task');
+      // Extract detailed error message from API response
+      let errorMessage = 'Failed to save task';
+      
+      if (err.response?.data?.message) {
+        errorMessage = err.response.data.message;
+      }
+      
+      if (err.response?.data?.errors) {
+        // If multiple validation errors, join them
+        const errors = Array.isArray(err.response.data.errors) 
+          ? err.response.data.errors.join(', ')
+          : err.response.data.errors;
+        errorMessage = `Validation Error: ${errors}`;
+      }
+      
+      setError(errorMessage);
       console.error('Save task error:', err);
     } finally {
       setLoading(false);
@@ -144,7 +159,7 @@ const TaskModal = ({ task, board, onClose, onUpdate, onDelete }) => {
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         {/* HEADER */}
         <div className="modal-header">
-          <div>
+          <div className="modal-header-content">
             {editMode ? (
               <input
                 type="text"

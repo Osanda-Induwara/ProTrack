@@ -47,12 +47,20 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 10px;
+}
+
+.modal-header-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .modal-header h2 {
   margin: 0 0 8px 0;
   font-size: 22px;
   color: #333;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .task-status {
@@ -68,6 +76,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-weight: 600;
+  box-sizing: border-box;
 }
 
 .modal-close {

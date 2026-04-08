@@ -18,6 +18,7 @@
 
 const Task = require('../models/taskModel');
 const Board = require('../models/boardModel');
+const mongoose = require('mongoose');
 
 /**
  * =====================================================
@@ -241,7 +242,25 @@ const updateTask = async (req, res, next) => {
 
     allowedFields.forEach(field => {
       if (updates[field] !== undefined) {
-        task[field] = updates[field];
+        // Special handling for different field types
+        if (field === 'assignee' && updates[field] === '') {
+          // Convert empty string to null for Mongoose ObjectId field
+          task[field] = null;
+        } else if (field === 'assignee' && updates[field]) {
+          // Validate that assignee is a valid MongoDB ObjectId
+          if (!mongoose.Types.ObjectId.isValid(updates[field])) {
+            throw new Error('Invalid assignee ID');
+          }
+          task[field] = updates[field];
+        } else if (field === 'dueDate' && updates[field] === '') {
+          // Convert empty string to null for Date field
+          task[field] = null;
+        } else if (field === 'tags') {
+          // Ensure tags is always an array
+          task[field] = Array.isArray(updates[field]) ? updates[field] : [];
+        } else {
+          task[field] = updates[field];
+        }
       }
     });
 
@@ -292,7 +311,7 @@ const deleteTask = async (req, res, next) => {
     const boardId = task.board;
 
     // Delete all comments on this task
-    const { Comment } = require('../models/commentModel');
+    const Comment = require('../models/commentModel');
     await Comment.deleteMany({ task: taskId });
 
     // Delete the task
